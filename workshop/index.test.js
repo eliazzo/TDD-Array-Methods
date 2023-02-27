@@ -43,3 +43,8 @@ test("every() returns a boolean", () => {
   equal(result, true)
 })
 
+test("every() only returns true values", () => {
+  const result = every([1, 2, 3, 4], (x) => x > 0);
+  const expected = [1, 2, 3, 4];
+  equal(result, expected)
+})

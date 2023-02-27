@@ -20,10 +20,14 @@ function filter(arr, fn){
 
 function every(arr, fn){
   for (let i=0; i<arr.length; i++){
-    if(fn(arr[i])){
-      
+    {
+      result = fn(arr[i]);
+      if (result){
+        arr.push(fn(arr[i]))
+      };
+
     }
   }
-  return true;
+  return arr;
 }
 
