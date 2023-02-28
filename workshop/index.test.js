@@ -38,13 +38,58 @@ test("filter() should return an empty array when there are no matching elements"
 
 // Testing every()
 
-test("every() returns a boolean", () => {
-  const result = true || false;
-  equal(result, true)
+test("Test every() returns true if every element satisfies the condition", () => {
+  const result = every([1,2,3,4], (x) => x > 0);
+  const expected = true;
+  equal(result, expected);
+}
+)
+
+test("Test every() should return false if ANY element fails the test", () => {
+  const result = every([-1, 0, 1, 2], (x) => x > 0);
+  const expected = false;
+  equal(result, expected)
 })
 
-test("every() only returns true values", () => {
-  const result = every([1, 2, 3, 4], (x) => x > 0);
-  const expected = [1, 2, 3, 4];
+// Testing some()
+test("Some returns true if at least one element in the array satisfies the condition", () => {
+  const result = some([1, 2, 3], (x) => x > 2);
+  const expected = true;
   equal(result, expected)
+})
+
+test("Some returns false if no elements in the array satisfy the condition", () => {
+  const result = some([1, 2, 3], (x) => x < 0);
+  const expected = false;
+  equal(result, expected);
+})
+
+// Testing find()
+
+test("Find() loops over each element in the array and calls the function with each one", () => {
+  const result = find([1, 2, 3], (x) => (x) === 2);
+  const expected = 2;
+  equal(result, expected);
+})
+
+test("If find() returns false for every element then undefined is returned", () => {
+  const result = find([1, 2, 3], (x) => x > 10);
+  const expected = undefined;
+  equal(result, expected);
+  
+})
+
+// Testing reduce()
+
+test("reduce() returns a single value", () => {
+  const result = reduce([1,2,3], (total, x) => total + x, 0);
+  const expected = 6;
+  equal(result, expected, "function should return a single value");
+})
+
+test("reduce() should call the fn for each element and use the return value as the new accumulator", () => {
+  const result = reduce([1,2], (total, x) => total + x, 0);
+  const expected = 3;
+  equal(result, expected);
+  
 })
